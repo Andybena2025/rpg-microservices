@@ -1,0 +1,273 @@
+{
+	"info": {
+		"name": "RPG Microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"description": "Full CRUD + error cases for clases-service and personajes-service"
+	},
+	"variable": [
+		{
+			"key": "baseUrlClases",
+			"value": "http://localhost:8081"
+		},
+		{
+			"key": "baseUrlPersonajes",
+			"value": "http://localhost:8082"
+		}
+	],
+	"item": [
+		{
+			"name": "Clases Service",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"url": "{{baseUrlClases}}/actuator/health"
+					}
+				},
+				{
+					"name": "Get All Clases",
+					"request": {
+						"method": "GET",
+						"url": "{{baseUrlClases}}/api/clases"
+					}
+				},
+				{
+					"name": "Get Clase by ID",
+					"request": {
+						"method": "GET",
+						"url": "{{baseUrlClases}}/api/clases/1"
+					}
+				},
+				{
+					"name": "Get Clase - Not Found (404)",
+					"request": {
+						"method": "GET",
+						"url": "{{baseUrlClases}}/api/clases/999"
+					}
+				},
+				{
+					"name": "Create Clase",
+					"request": {
+						"method": "POST",
+						"url": "{{baseUrlClases}}/api/clases",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Ranger\",\n  \"descripcion\": \"A skilled archer and tracker of the wilderness\",\n  \"rolPrincipal\": \"DPS\",\n  \"dadoDeVida\": 10\n}"
+						}
+					}
+				},
+				{
+					"name": "Create Clase - Validation Error (400)",
+					"request": {
+						"method": "POST",
+						"url": "{{baseUrlClases}}/api/clases",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"\",\n  \"descripcion\": \"\",\n  \"rolPrincipal\": \"\",\n  \"dadoDeVida\": 0\n}"
+						}
+					}
+				},
+				{
+					"name": "Update Clase",
+					"request": {
+						"method": "PUT",
+						"url": "{{baseUrlClases}}/api/clases/1",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Warrior\",\n  \"descripcion\": \"An unstoppable melee fighter clad in heavy plate armor\",\n  \"rolPrincipal\": \"Tank\",\n  \"dadoDeVida\": 12\n}"
+						}
+					}
+				},
+				{
+					"name": "Update Clase - Not Found (404)",
+					"request": {
+						"method": "PUT",
+						"url": "{{baseUrlClases}}/api/clases/999",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Ghost\",\n  \"descripcion\": \"Does not exist\",\n  \"rolPrincipal\": \"None\",\n  \"dadoDeVida\": 1\n}"
+						}
+					}
+				},
+				{
+					"name": "Delete Clase",
+					"request": {
+						"method": "DELETE",
+						"url": "{{baseUrlClases}}/api/clases/6"
+					}
+				},
+				{
+					"name": "Delete Clase - Not Found (404)",
+					"request": {
+						"method": "DELETE",
+						"url": "{{baseUrlClases}}/api/clases/999"
+					}
+				}
+			]
+		},
+		{
+			"name": "Personajes Service",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"url": "{{baseUrlPersonajes}}/actuator/health"
+					}
+				},
+				{
+					"name": "Get All Personajes",
+					"request": {
+						"method": "GET",
+						"url": "{{baseUrlPersonajes}}/api/personajes"
+					}
+				},
+				{
+					"name": "Get Personaje by ID",
+					"request": {
+						"method": "GET",
+						"url": "{{baseUrlPersonajes}}/api/personajes/1"
+					}
+				},
+				{
+					"name": "Get Personaje - Not Found (404)",
+					"request": {
+						"method": "GET",
+						"url": "{{baseUrlPersonajes}}/api/personajes/999"
+					}
+				},
+				{
+					"name": "Get Personaje Detalle (with Clase info)",
+					"request": {
+						"method": "GET",
+						"url": "{{baseUrlPersonajes}}/api/personajes/1/detalle"
+					}
+				},
+				{
+					"name": "Create Personaje",
+					"request": {
+						"method": "POST",
+						"url": "{{baseUrlPersonajes}}/api/personajes",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Aragorn\",\n  \"nivel\": 15,\n  \"puntosDeVida\": 120,\n  \"claseId\": 1\n}"
+						}
+					}
+				},
+				{
+					"name": "Create Personaje - Invalid claseId (400)",
+					"request": {
+						"method": "POST",
+						"url": "{{baseUrlPersonajes}}/api/personajes",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Nobody\",\n  \"nivel\": 1,\n  \"puntosDeVida\": 10,\n  \"claseId\": 999\n}"
+						}
+					}
+				},
+				{
+					"name": "Create Personaje - Validation Error (400)",
+					"request": {
+						"method": "POST",
+						"url": "{{baseUrlPersonajes}}/api/personajes",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"\",\n  \"nivel\": 0,\n  \"puntosDeVida\": 0,\n  \"claseId\": null\n}"
+						}
+					}
+				},
+				{
+					"name": "Update Personaje",
+					"request": {
+						"method": "PUT",
+						"url": "{{baseUrlPersonajes}}/api/personajes/1",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Aragorn the King\",\n  \"nivel\": 20,\n  \"puntosDeVida\": 150,\n  \"claseId\": 1\n}"
+						}
+					}
+				},
+				{
+					"name": "Update Personaje - Invalid claseId (400)",
+					"request": {
+						"method": "PUT",
+						"url": "{{baseUrlPersonajes}}/api/personajes/1",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Aragorn\",\n  \"nivel\": 15,\n  \"puntosDeVida\": 120,\n  \"claseId\": 999\n}"
+						}
+					}
+				},
+				{
+					"name": "Delete Personaje",
+					"request": {
+						"method": "DELETE",
+						"url": "{{baseUrlPersonajes}}/api/personajes/8"
+					}
+				},
+				{
+					"name": "Delete Personaje - Not Found (404)",
+					"request": {
+						"method": "DELETE",
+						"url": "{{baseUrlPersonajes}}/api/personajes/999"
+					}
+				}
+			]
+		}
+	]
+}

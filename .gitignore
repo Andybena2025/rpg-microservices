@@ -1,0 +1,18 @@
+# Environment secrets
+.env
+
+# Java / Maven
+**/target/
+*.class
+*.jar
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# macOS
+.DS_Store
+
+# Docker
+mysql-data/
