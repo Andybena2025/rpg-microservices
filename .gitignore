@@ -16,3 +16,6 @@ out/
 
 # Docker
 mysql-data/
+
+# SSH keys
+*.pem
