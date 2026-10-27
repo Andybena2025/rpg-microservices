@@ -50,6 +50,22 @@ Manages RPG characters. Validates `claseId` against clases-service via HTTP.
 | DELETE | `/api/personajes/{id}` | Delete a character |
 | GET | `/actuator/health` | Health check |
 
+## Microservice Relationship
+
+`personajes-service` depends on `clases-service` via HTTP (Spring `RestClient`):
+
+- **On POST/PUT** `/api/personajes`: calls `GET /api/clases/{claseId}` on clases-service to confirm the class exists. If it doesn't, returns `400 Bad Request` with the message: *"Clase with id X does not exist in clases-service"*.
+- **On GET** `/api/personajes/{id}/detalle`: calls clases-service to fetch the full class data and returns it embedded in the response alongside the character.
+- The clases-service URL is configured via the environment variable `CLASES_SERVICE_URL` (never hardcoded). In Docker Compose, it resolves to `http://clases-service:8081` using container DNS.
+
+## Seed Data
+
+The services auto-insert seed data on first startup:
+
+**5 Clases:** Warrior (Tank), Mage (DPS), Cleric (Healer), Rogue (DPS), Paladin (Tank)
+
+**8 Personajes:** Thorin Ironforge, Elara Moonwhisper, Brother Aldric, Shadow Vex, Sir Galahad, Ragnar Stonefist, Zara Flamecaster, Luna Nightshade
+
 ## Tech Stack
 
 - **Java 21** + **Spring Boot 4.1.2**
