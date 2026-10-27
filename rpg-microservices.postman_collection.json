@@ -7,11 +7,13 @@
 	"variable": [
 		{
 			"key": "baseUrlClases",
-			"value": "http://localhost:8081"
+			"value": "http://18.214.99.108:8081",
+			"description": "AWS EC2 deployment (for localhost use: http://localhost:8081)"
 		},
 		{
 			"key": "baseUrlPersonajes",
-			"value": "http://localhost:8082"
+			"value": "http://18.214.99.108:8082",
+			"description": "AWS EC2 deployment (for localhost use: http://localhost:8082)"
 		}
 	],
 	"item": [

@@ -96,7 +96,16 @@ The services are deployed on an EC2 instance with Docker Compose.
 
 ## Postman Collection
 
-Import `rpg-microservices.postman_collection.json` into Postman. It includes all endpoints and error cases for both services. Update the `baseUrlClases` and `baseUrlPersonajes` variables to point to the EC2 IP when testing the cloud deployment.
+Import `rpg-microservices.postman_collection.json` into Postman. It includes **22 requests** covering all endpoints and error cases for both services.
+
+The collection variables default to the **AWS EC2** deployment. To switch environments, import one of the Postman environment files:
+
+| File | Target |
+|------|--------|
+| `rpg-aws.postman_environment.json` | AWS EC2 (`http://18.214.99.108`) |
+| `rpg-localhost.postman_environment.json` | Local Docker (`http://localhost`) |
+
+In Postman, select the environment from the top-right dropdown to override the collection variables.
 
 ## Author
 
